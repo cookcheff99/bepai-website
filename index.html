@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Bepai</title>
+<title>BEPAI</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 :root {
-  --glow: rgba(140, 0, 255, 0.35);
+  --glow: rgba(140, 0, 255, 0.4);
 }
 
 body {
@@ -30,7 +30,7 @@ body {
 /* SIDEBAR */
 .sidebar {
   width: 220px;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.75);
   backdrop-filter: blur(12px);
   padding: 24px;
   position: fixed;
@@ -43,7 +43,9 @@ body {
   margin-bottom: 40px;
   transition: transform .4s ease;
 }
-.logo:hover { transform: scale(1.08) rotate(-1deg); }
+.logo:hover {
+  transform: scale(1.08);
+}
 
 .nav a {
   display: block;
@@ -54,7 +56,9 @@ body {
   font-size: 14px;
   transition: color .3s;
 }
-.nav a:hover { color: #fff; }
+.nav a:hover {
+  color: #fff;
+}
 
 /* CONTENT */
 .content {
@@ -74,17 +78,21 @@ section.show {
   transform: translateY(0);
 }
 
-h1 { font-size: 48px; }
-h2 { font-size: 32px; }
+h1 {
+  font-size: 48px;
+}
+h2 {
+  font-size: 32px;
+}
 
 p {
   color: #c5c5c5;
   line-height: 1.7;
-  max-width: 700px;
+  max-width: 720px;
 }
 
 /* BUTTON */
-.whitepaper-btn {
+.button {
   position: relative;
   display: inline-block;
   margin-top: 30px;
@@ -95,7 +103,7 @@ p {
   overflow: hidden;
   letter-spacing: 2px;
 }
-.whitepaper-btn::after {
+.button::after {
   content: "";
   position: absolute;
   top: 0;
@@ -105,36 +113,43 @@ p {
   background: linear-gradient(120deg, transparent, rgba(255,255,255,0.8), transparent);
   transition: .5s;
 }
-.whitepaper-btn:hover::after {
+.button:hover::after {
   left: 100%;
 }
-.whitepaper-btn:hover {
+.button:hover {
   box-shadow: 0 0 25px var(--glow);
 }
 
-/* ROADMAP */
-.roadmap-item {
+/* TOKENOMICS */
+.token-box {
   border-left: 2px solid rgba(255,255,255,.4);
   padding-left: 24px;
-  margin-bottom: 50px;
+  margin-bottom: 45px;
   transition: all .4s ease;
 }
-.roadmap-item:hover {
+.token-box:hover {
   transform: translateX(8px);
   box-shadow: -5px 0 25px var(--glow);
 }
 
-.phase {
-  letter-spacing: 2px;
-  font-size: 14px;
+.token-title {
+  letter-spacing: 3px;
+  font-size: 13px;
   margin-bottom: 6px;
-  display: block;
+  color: #fff;
 }
 
 /* MOBILE */
 @media(max-width:768px){
-  .sidebar{ position:relative; width:100%; height:auto; }
-  .content{ margin-left:0; padding:40px; }
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+  .content {
+    margin-left: 0;
+    padding: 40px;
+  }
 }
 </style>
 </head>
@@ -145,7 +160,7 @@ p {
   <img src="assets/logo.png" class="logo">
   <nav class="nav">
     <a href="#about">ABOUT</a>
-    <a href="#roadmap">ROADMAP</a>
+    <a href="#tokenomics">TOKENOMICS</a>
     <a href="whitepaper.pdf" target="_blank">WHITEPAPER</a>
     <a href="https://x.com/tokenBepai" target="_blank">X</a>
   </nav>
@@ -156,39 +171,67 @@ p {
 <section id="about">
   <h1>BEPAI</h1>
   <p>
-    BEPAI is an AI-powered blockchain project building intelligent,
-    scalable and future-ready decentralized solutions.
+    BEPAI is an AI-powered blockchain project focused on building
+    intelligent, scalable and future-ready decentralized solutions.
   </p>
 
-  <a href="whitepaper.pdf" class="whitepaper-btn" target="_blank">Whitepaper</a>
+  <a href="whitepaper.pdf" class="button" target="_blank">
+    Whitepaper
+  </a>
 </section>
 
-<section id="roadmap">
-  <h2>Roadmap</h2>
+<section id="tokenomics">
+  <h2>Tokenomics</h2>
 
-  <div class="roadmap-item">
-    <span class="phase">PHASE 1</span>
-    <p>Research, branding, website launch and community building.</p>
+  <div class="token-box">
+    <span class="token-title">GENERAL</span>
+    <p>
+      Token Name: BEPAI<br>
+      Symbol: BEPAI<br>
+      Maximum Supply: 1,000,000,000 BEPAI<br>
+      Mint: Disabled (No additional supply)
+    </p>
   </div>
 
-  <div class="roadmap-item">
-    <span class="phase">PHASE 2</span>
-    <p>Token deployment, ecosystem growth and partnerships.</p>
+  <div class="token-box">
+    <span class="token-title">TOKEN DISTRIBUTION</span>
+    <p>
+      Presale: 10,000,000 BEPAI (1%)<br>
+      Liquidity & Market: 390,000,000 BEPAI (39%)<br>
+      Ecosystem & Development: 250,000,000 BEPAI (25%)<br>
+      Community & Incentives: 200,000,000 BEPAI (20%)<br>
+      Team & Operations: 100,000,000 BEPAI (10%)<br>
+      Reserve & Strategic Allocation: 50,000,000 BEPAI (5%)
+    </p>
   </div>
 
-  <div class="roadmap-item">
-    <span class="phase">PHASE 3</span>
-    <p>Advanced AI systems, governance and long-term scaling.</p>
+  <div class="token-box">
+    <span class="token-title">PRICING</span>
+    <p>
+      Initial Token Price: 1 BEPAI = 0.012 USDT<br>
+      Initial Rate: 1 USDT ≈ 83 BEPAI
+    </p>
   </div>
+
+  <div class="token-box">
+    <span class="token-title">SECURITY</span>
+    <p>
+      Liquidity locking and smart contract audit
+      are planned as part of the launch phase.
+    </p>
+  </div>
+
 </section>
 
 </main>
 
 <script>
-document.addEventListener("DOMContentLoaded",()=>{
-  const sections=document.querySelectorAll("section");
-  sections.forEach((s,i)=>{
-    setTimeout(()=>s.classList.add("show"), i*300);
+document.addEventListener("DOMContentLoaded", () => {
+  const sections = document.querySelectorAll("section");
+  sections.forEach((section, index) => {
+    setTimeout(() => {
+      section.classList.add("show");
+    }, index * 300);
   });
 });
 </script>
