@@ -24,13 +24,13 @@ body{
   100%{background-position:0% 50%}
 }
 
-/* === SAĞ ÜST CONNECT WALLET === */
+/* ===== CONNECT WALLET (TOP RIGHT) ===== */
 .connect-wallet{
   position:fixed;
   top:20px;
-  right:24px;
+  right:28px;
   z-index:9999;
-  padding:12px 22px;
+  padding:12px 26px;
   background:transparent;
   color:#fff;
   border:1px solid #fff;
@@ -63,7 +63,9 @@ body{
 /* CONTENT */
 .content{margin-left:220px;padding:70px;max-width:900px}
 section{
-  margin-bottom:140px;opacity:0;transform:translateY(60px);
+  margin-bottom:140px;
+  opacity:0;
+  transform:translateY(60px);
   transition:all .9s ease
 }
 section.show{opacity:1;transform:translateY(0)}
@@ -72,34 +74,56 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
 
 /* HERO */
 .hero-title{
-  font-size:56px;letter-spacing:6px;margin:0 0 16px 0;
-  white-space:nowrap;overflow:hidden;border-right:3px solid #fff;
-  width:0;animation:typing 2.2s steps(6,end) forwards, caret .8s step-end infinite;
+  font-size:56px;
+  letter-spacing:6px;
+  margin:0 0 16px 0;
+  white-space:nowrap;
+  overflow:hidden;
+  border-right:3px solid #fff;
+  width:0;
+  animation:typing 2.2s steps(6,end) forwards, caret .8s step-end infinite;
   text-shadow:0 0 30px var(--glow)
 }
 @keyframes typing{to{width:6ch}}
 @keyframes caret{50%{border-color:transparent}}
 .hero-sub{
-  opacity:0;transform:translateY(10px);
-  animation:fadeUp .9s ease forwards;animation-delay:2.3s
+  opacity:0;
+  transform:translateY(10px);
+  animation:fadeUp .9s ease forwards;
+  animation-delay:2.3s
 }
 @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
 
 /* BUTTON */
 .button{
-  position:relative;display:inline-block;margin-top:30px;
-  padding:16px 42px;color:#fff;text-decoration:none;
-  border:1px solid #fff;overflow:hidden;letter-spacing:2px
+  position:relative;
+  display:inline-block;
+  margin-top:30px;
+  padding:16px 42px;
+  color:#fff;
+  text-decoration:none;
+  border:1px solid #fff;
+  overflow:hidden;
+  letter-spacing:2px
 }
 .button:hover{box-shadow:0 0 25px var(--glow)}
 
 /* BOXES */
 .box{
   border-left:2px solid rgba(255,255,255,.4);
-  padding-left:24px;margin-bottom:45px;transition:.4s
+  padding-left:24px;
+  margin-bottom:45px;
+  transition:.4s
 }
-.box:hover{transform:translateX(8px);box-shadow:-5px 0 25px var(--glow)}
-.box-title{letter-spacing:3px;font-size:13px;margin-bottom:6px}
+.box:hover{
+  transform:translateX(8px);
+  box-shadow:-5px 0 25px var(--glow)
+}
+.box-title{
+  letter-spacing:3px;
+  font-size:13px;
+  margin-bottom:6px
+}
 
 /* ABOUT GRID */
 .about-grid{
@@ -118,12 +142,10 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
   box-shadow:0 0 30px var(--glow);
   transform:translateY(-6px)
 }
-.about-card h3{margin-top:0;letter-spacing:3px;font-size:16px}
-
-/* TRANSFER */
-#transfer{
-  border-top:1px solid rgba(255,255,255,.08);
-  padding-top:120px;
+.about-card h3{
+  margin-top:0;
+  letter-spacing:3px;
+  font-size:16px
 }
 
 /* MOBILE */
@@ -138,7 +160,7 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
 
 <body>
 
-<!-- SAĞ ÜST BUTON -->
+<!-- CONNECT WALLET -->
 <button class="connect-wallet" onclick="goToTransfer()">CONNECT WALLET</button>
 
 <aside class="sidebar">
@@ -154,26 +176,103 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
 
 <main class="content">
 
+<!-- ABOUT -->
 <section id="about">
   <h1 class="hero-title">BEPAI</h1>
   <p class="hero-sub">
     BEPAI is an AI-driven blockchain project designed to power
     intelligent, scalable and decentralized ecosystems.
   </p>
+
+  <div class="about-grid">
+    <div class="about-card">
+      <h3>VISION</h3>
+      <p>
+        To become a next-generation AI blockchain layer that enables
+        autonomous decision-making, trustless automation and
+        sustainable decentralized growth.
+      </p>
+    </div>
+
+    <div class="about-card">
+      <h3>MISSION</h3>
+      <p>
+        Our mission is to merge artificial intelligence with blockchain
+        technology to create efficient, transparent and adaptive
+        decentralized solutions for the future.
+      </p>
+    </div>
+
+    <div class="about-card">
+      <h3>WHY BEPAI?</h3>
+      <p>
+        BEPAI focuses on real AI utility, strong token economics and
+        long-term ecosystem sustainability rather than short-term hype.
+      </p>
+    </div>
+
+    <div class="about-card">
+      <h3>LONG-TERM GOAL</h3>
+      <p>
+        Build a scalable AI-powered ecosystem where users, developers
+        and communities benefit from intelligent automation and
+        decentralized governance.
+      </p>
+    </div>
+  </div>
+
+  <a href="whitepaper.pdf" class="button" target="_blank">Read Whitepaper</a>
 </section>
 
+<!-- ROADMAP (ESKİ HALİ) -->
 <section id="roadmap">
   <h2>Roadmap</h2>
-  <div class="box"><p>Q1 2026 – Foundation & launch</p></div>
-  <div class="box"><p>Q2 2026 – Token deployment</p></div>
-  <div class="box"><p>Q3 2026 – AI integrations</p></div>
+  <div class="box"><span class="box-title">Q1 2026</span>
+    <p>Foundation, brand identity, website launch, whitepaper and community.</p>
+  </div>
+  <div class="box"><span class="box-title">Q2 2026</span>
+    <p>Token deployment, ecosystem architecture and early adoption.</p>
+  </div>
+  <div class="box"><span class="box-title">Q3 2026</span>
+    <p>AI integrations, governance tools and scalability optimization.</p>
+  </div>
 </section>
 
+<!-- TOKENOMICS (ESKİ HALİ) -->
 <section id="tokenomics">
   <h2>Tokenomics</h2>
-  <div class="box"><p>Max Supply: 1,000,000,000 BEPAI</p></div>
+
+  <div class="box"><span class="box-title">GENERAL</span>
+    <p>
+      Token: BEPAI<br>
+      Max Supply: 1,000,000,000<br>
+      Mint: Disabled
+    </p>
+  </div>
+
+  <div class="box"><span class="box-title">DISTRIBUTION</span>
+    <p>
+      Presale: 100,000,000 (10%)<br>
+      Liquidity: 700,000,000 (70%)<br>
+      Ecosystem: 140,000,000 (14%)<br>
+      Team: 10,000,000 (1%)<br>
+      Reserve: 50,000,000 (5%)
+    </p>
+  </div>
+
+  <div class="box"><span class="box-title">PRICING</span>
+    <p>
+      1 BEPAI = 0.012 USDT<br>
+      1 USDT ≈ 83 BEPAI
+    </p>
+  </div>
+
+  <div class="box"><span class="box-title">SECURITY</span>
+    <p>Liquidity locking and audit are planned for launch.</p>
+  </div>
 </section>
 
+<!-- TRANSFER -->
 <section id="transfer">
   <h2>Wallet / Transfer Area</h2>
   <p>This section will be used for wallet connection.</p>
