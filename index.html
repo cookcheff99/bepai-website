@@ -5,144 +5,116 @@
 <title>BEPAI</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- FORCE FAVICON -->
-<link rel="icon" href="/favicon.ico?v=1" type="image/x-icon">
-
 <style>
-*{
-  box-sizing:border-box;
-}
+:root { --glow: rgba(140,0,255,.45); }
 
-html,body{
+body{
   margin:0;
-  padding:0;
-  width:100%;
-  overflow-x:hidden;
   font-family:Arial,Helvetica,sans-serif;
-  background:#050505;
   color:#fff;
+  display:flex;
+  min-height:100vh;
+  background:linear-gradient(120deg,#050505,#0b0b0b,#050505);
+  background-size:300% 300%;
+  animation:bgMove 20s ease infinite;
 }
-
-:root{--glow:rgba(140,0,255,.45);}
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
 
 /* SIDEBAR */
 .sidebar{
-  position:fixed;
-  top:0;
-  left:0;
   width:220px;
-  height:100vh;
-  background:rgba(0,0,0,.85);
-  backdrop-filter:blur(14px);
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(12px);
   padding:24px;
+  position:fixed;
+  height:100vh;
   border-right:1px solid rgba(255,255,255,.05);
-  z-index:1000;
 }
-.logo{
-  width:140px;
-  margin-bottom:40px;
-}
+.logo{width:140px;margin-bottom:40px;transition:.4s}
+.logo:hover{transform:scale(1.08)}
 .nav a{
-  display:block;
-  color:#9ca3af;
-  text-decoration:none;
-  margin-bottom:16px;
-  letter-spacing:2px;
-  font-size:14px;
+  display:block;color:#9ca3af;text-decoration:none;
+  margin-bottom:16px;letter-spacing:2px;font-size:14px;transition:.3s
 }
 .nav a:hover{color:#fff}
 
 /* CONTENT */
-.content{
-  margin-left:220px;
-  width:calc(100% - 220px);
-}
-
-/* SECTIONS */
+.content{margin-left:220px;padding:70px;max-width:900px}
 section{
-  padding:120px 70px;
-  min-height:100vh;
-  opacity:0;
-  transform:translateY(40px);
-  transition:all .9s ease;
+  margin-bottom:140px;opacity:0;transform:translateY(60px);
+  transition:all .9s ease
 }
-section.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-h1,h2{margin-top:0}
+section.show{opacity:1;transform:translateY(0)}
 h2{font-size:32px}
-p{
-  color:#cfcfcf;
-  line-height:1.8;
-  max-width:760px;
-}
+p{color:#c5c5c5;line-height:1.7;max-width:760px}
 
 /* HERO */
-#about{
-  background:
-    linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
-    url("assets/hero-bg.jpg") center/cover no-repeat;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
 .hero-title{
-  font-size:64px;
-  letter-spacing:8px;
-  white-space:nowrap;
-  overflow:hidden;
-  border-right:3px solid #fff;
-  width:0;
-  animation:typing 2.4s steps(6,end) forwards;
-  text-shadow:0 0 40px var(--glow);
+  font-size:56px;letter-spacing:6px;margin:0 0 16px 0;
+  white-space:nowrap;overflow:hidden;border-right:3px solid #fff;
+  width:0;animation:typing 2.2s steps(6,end) forwards, caret .8s step-end infinite;
+  text-shadow:0 0 30px var(--glow)
 }
 @keyframes typing{to{width:6ch}}
-
+@keyframes caret{50%{border-color:transparent}}
 .hero-sub{
-  font-size:18px;
-  margin-top:20px;
-  max-width:720px;
+  opacity:0;transform:translateY(10px);
+  animation:fadeUp .9s ease forwards;animation-delay:2.3s
 }
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
 
 /* BUTTON */
 .button{
-  display:inline-block;
-  margin-top:40px;
-  padding:16px 46px;
-  color:#fff;
-  text-decoration:none;
-  border:1px solid #fff;
+  position:relative;display:inline-block;margin-top:30px;
+  padding:16px 42px;color:#fff;text-decoration:none;
+  border:1px solid #fff;overflow:hidden;letter-spacing:2px
 }
-.button:hover{
-  box-shadow:0 0 25px var(--glow);
+.button::after{
+  content:"";position:absolute;top:0;left:-100%;
+  width:100%;height:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.8),transparent);
+  transition:.5s
 }
+.button:hover::after{left:100%}
+.button:hover{box-shadow:0 0 25px var(--glow)}
 
-/* BOX */
+/* BOXES */
 .box{
   border-left:2px solid rgba(255,255,255,.4);
-  padding-left:24px;
-  margin-bottom:40px;
+  padding-left:24px;margin-bottom:45px;transition:.4s
 }
+.box:hover{transform:translateX(8px);box-shadow:-5px 0 25px var(--glow)}
+.box-title{letter-spacing:3px;font-size:13px;margin-bottom:6px}
+
+/* ABOUT GRID */
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  margin-top:40px
+}
+.about-card{
+  background:rgba(255,255,255,.03);
+  padding:30px;
+  border:1px solid rgba(255,255,255,.05);
+  transition:.4s
+}
+.about-card:hover{
+  box-shadow:0 0 30px var(--glow);
+  transform:translateY(-6px)
+}
+.about-card h3{margin-top:0;letter-spacing:3px;font-size:16px}
 
 /* MOBILE */
 @media(max-width:768px){
-  .sidebar{
-    position:relative;
-    width:100%;
-    height:auto;
-  }
-  .content{
-    margin-left:0;
-    width:100%;
-  }
-  section{
-    padding:100px 32px;
-  }
-  .hero-title{
-    font-size:42px;
-  }
+  .sidebar{position:relative;width:100%;height:auto}
+  .content{margin-left:0;padding:40px}
+  .hero-title{font-size:42px}
+  .about-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -150,7 +122,7 @@ p{
 <body>
 
 <aside class="sidebar">
-  <img src="assets/logo.png" class="logo" alt="BEPAI">
+  <img src="assets/logo.png" class="logo">
   <nav class="nav">
     <a href="#about">ABOUT</a>
     <a href="#roadmap">ROADMAP</a>
@@ -165,30 +137,86 @@ p{
 <section id="about">
   <h1 class="hero-title">BEPAI</h1>
   <p class="hero-sub">
-    BEPAI is an AI-powered blockchain project focused on building
-    intelligent, scalable and future-ready decentralized ecosystems.
+    BEPAI is an AI-driven blockchain project designed to power
+    intelligent, scalable and decentralized ecosystems.
   </p>
+
+  <div class="about-grid">
+    <div class="about-card">
+      <h3>VISION</h3>
+      <p>
+        To become a next-generation AI blockchain layer that enables
+        autonomous decision-making, trustless automation and
+        sustainable decentralized growth.
+      </p>
+    </div>
+
+    <div class="about-card">
+      <h3>MISSION</h3>
+      <p>
+        Our mission is to merge artificial intelligence with blockchain
+        technology to create efficient, transparent and adaptive
+        decentralized solutions for the future.
+      </p>
+    </div>
+
+    <div class="about-card">
+      <h3>WHY BEPAI?</h3>
+      <p>
+        BEPAI focuses on real AI utility, strong token economics and
+        long-term ecosystem sustainability rather than short-term hype.
+      </p>
+    </div>
+
+    <div class="about-card">
+      <h3>LONG-TERM GOAL</h3>
+      <p>
+        Build a scalable AI-powered ecosystem where users, developers
+        and communities benefit from intelligent automation and
+        decentralized governance.
+      </p>
+    </div>
+  </div>
+
   <a href="whitepaper.pdf" class="button" target="_blank">Read Whitepaper</a>
 </section>
 
 <section id="roadmap">
   <h2>Roadmap</h2>
-  <div class="box"><p><b>Q1 2026</b><br>Foundation and website launch.</p></div>
-  <div class="box"><p><b>Q2 2026</b><br>Token deployment and ecosystem setup.</p></div>
-  <div class="box"><p><b>Q3 2026</b><br>AI integrations and governance tools.</p></div>
+  <div class="box"><span class="box-title">Q1 2026</span>
+    <p>Foundation, brand identity, website launch, whitepaper and community.</p>
+  </div>
+  <div class="box"><span class="box-title">Q2 2026</span>
+    <p>Token deployment, ecosystem architecture and early adoption.</p>
+  </div>
+  <div class="box"><span class="box-title">Q3 2026</span>
+    <p>AI integrations, governance tools and scalability optimization.</p>
+  </div>
 </section>
 
 <section id="tokenomics">
   <h2>Tokenomics</h2>
-  <div class="box">
+
+  <div class="box"><span class="box-title">GENERAL</span>
+    <p>Token: BEPAI<br>Max Supply: 1,000,000,000<br>Mint: Disabled</p>
+  </div>
+
+  <div class="box"><span class="box-title">DISTRIBUTION</span>
     <p>
       Presale: 100,000,000 (10%)<br>
       Liquidity: 700,000,000 (70%)<br>
       Ecosystem: 140,000,000 (14%)<br>
       Team: 10,000,000 (1%)<br>
-      Reserve: 50,000,000 (5%)<br><br>
-      Price: 1 BEPAI = 0.012 USDT
+      Reserve: 50,000,000 (5%)
     </p>
+  </div>
+
+  <div class="box"><span class="box-title">PRICING</span>
+    <p>1 BEPAI = 0.012 USDT<br>1 USDT ≈ 83 BEPAI</p>
+  </div>
+
+  <div class="box"><span class="box-title">SECURITY</span>
+    <p>Liquidity locking and audit are planned for launch.</p>
   </div>
 </section>
 
@@ -197,7 +225,7 @@ p{
 <script>
 document.addEventListener("DOMContentLoaded",()=>{
   document.querySelectorAll("section").forEach((s,i)=>{
-    setTimeout(()=>s.classList.add("show"),i*250);
+    setTimeout(()=>s.classList.add("show"),i*300);
   });
 });
 </script>
