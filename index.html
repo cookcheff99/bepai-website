@@ -6,82 +6,145 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-  body {
-    margin: 0;
-    min-height: 100vh;
-    background-color: #0b0b0b;
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #0b0b0b;
+      color: #ffffff;
+      display: flex;
+      min-height: 100vh;
+    }
 
-  .site-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+    /* SIDEBAR */
+    .sidebar {
+      width: 220px;
+      background-color: #000000;
+      padding: 24px;
+      box-sizing: border-box;
+      position: fixed;
+      height: 100vh;
+    }
 
-  .logo {
-    max-width: 180px;
-    width: 100%;
-    height: auto;
-  }
-
-  .title {
-    margin-top: 16px;
-    font-size: 36px;
-    color: #ffffff;
-    letter-spacing: 3px;
-  }
-
-  .tagline {
-    margin-top: 8px;
-    font-size: 16px;
-    color: #9ca3af;
-  }
-
-  .whitepaper-btn {
-    margin-top: 24px;
-    padding: 12px 32px;
-    border: 1px solid #ffffff;
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 14px;
-    letter-spacing: 2px;
-    transition: all 0.3s ease;
-  }
-
-  .whitepaper-btn:hover {
-    background-color: #ffffff;
-    color: #0b0b0b;
-  }
-
-  @media (max-width: 600px) {
     .logo {
-      max-width: 140px;
+      width: 140px;
+      margin-bottom: 40px;
     }
 
-    .title {
+    .nav a {
+      display: block;
+      color: #9ca3af;
+      text-decoration: none;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    .nav a:hover {
+      color: #ffffff;
+    }
+
+    /* CONTENT */
+    .content {
+      margin-left: 220px;
+      padding: 60px;
+      max-width: 900px;
+    }
+
+    section {
+      margin-bottom: 100px;
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 16px;
+    }
+
+    h2 {
       font-size: 28px;
+      margin-bottom: 16px;
     }
-  }
-</style>
 
+    p {
+      color: #9ca3af;
+      line-height: 1.6;
+      max-width: 700px;
+    }
+
+    .whitepaper-btn {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 12px 32px;
+      border: 1px solid #ffffff;
+      color: #ffffff;
+      text-decoration: none;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .whitepaper-btn:hover {
+      background-color: #ffffff;
+      color: #0b0b0b;
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+      }
+
+      .content {
+        margin-left: 0;
+        padding: 32px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-  <header class="site-header">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
     <img src="assets/logo.png" alt="Bepai Logo" class="logo">
-    <h1 class="title">BEPAI</h1>
-    <p class="tagline">AI-powered blockchain innovation</p>
-    <a href="whitepaper.pdf" class="whitepaper-btn" target="_blank">
-  Whitepaper
-</a>
 
-  </header>
+    <nav class="nav">
+      <a href="#about">ABOUT</a>
+      <a href="#roadmap">ROADMAP</a>
+      <a href="whitepaper.pdf" target="_blank">WHITEPAPER</a>
+    </nav>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <section id="about">
+      <h1>BEPAI</h1>
+      <p>
+        BEPAI is an AI-powered blockchain project focused on building intelligent,
+        scalable and future-ready decentralized solutions.
+      </p>
+
+      <a href="whitepaper.pdf" class="whitepaper-btn" target="_blank">
+        Whitepaper
+      </a>
+    </section>
+
+    <section id="roadmap">
+      <h2>Roadmap</h2>
+
+      <p><strong>Phase 1</strong><br>
+      Research, branding, website launch, community building</p>
+
+      <p><strong>Phase 2</strong><br>
+      Token deployment, ecosystem development, partnerships</p>
+
+      <p><strong>Phase 3</strong><br>
+      AI integration, ecosystem expansion, governance</p>
+    </section>
+
+  </main>
 
 </body>
 </html>
