@@ -24,7 +24,7 @@ body{
   100%{background-position:0% 50%}
 }
 
-/* CONNECT WALLET – SAĞ ÜST */
+/* ===== CONNECT WALLET (TOP RIGHT) ===== */
 .connect-wallet{
   position:fixed;
   top:20px;
@@ -38,7 +38,9 @@ body{
   font-size:13px;
   cursor:pointer;
 }
-.connect-wallet:hover{box-shadow:0 0 25px var(--glow)}
+.connect-wallet:hover{
+  box-shadow:0 0 25px var(--glow);
+}
 
 /* SIDEBAR */
 .sidebar{
@@ -53,13 +55,8 @@ body{
 .logo{width:140px;margin-bottom:40px;transition:.4s}
 .logo:hover{transform:scale(1.08)}
 .nav a{
-  display:block;
-  color:#9ca3af;
-  text-decoration:none;
-  margin-bottom:16px;
-  letter-spacing:2px;
-  font-size:14px;
-  transition:.3s
+  display:block;color:#9ca3af;text-decoration:none;
+  margin-bottom:16px;letter-spacing:2px;font-size:14px;transition:.3s
 }
 .nav a:hover{color:#fff}
 
@@ -193,7 +190,6 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
     <a href="#roadmap">ROADMAP</a>
     <a href="#tokenomics">TOKENOMICS</a>
     <a href="whitepaper.pdf" target="_blank">WHITEPAPER</a>
-    <!-- X PLATFORM BUTONU GERİ GELDİ -->
     <a href="https://x.com/tokenBepai" target="_blank">X</a>
   </nav>
 </aside>
@@ -210,19 +206,34 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
   <div class="about-grid">
     <div class="about-card">
       <h3>VISION</h3>
-      <p>Next-generation AI blockchain layer.</p>
+      <p>
+        To become a next-generation AI blockchain layer that enables
+        autonomous decision-making, trustless automation and
+        sustainable decentralized growth.
+      </p>
     </div>
     <div class="about-card">
       <h3>MISSION</h3>
-      <p>Merging artificial intelligence with blockchain.</p>
+      <p>
+        Our mission is to merge artificial intelligence with blockchain
+        technology to create efficient, transparent and adaptive
+        decentralized solutions for the future.
+      </p>
     </div>
     <div class="about-card">
       <h3>WHY BEPAI?</h3>
-      <p>Utility-driven, long-term ecosystem.</p>
+      <p>
+        BEPAI focuses on real AI utility, strong token economics and
+        long-term ecosystem sustainability rather than short-term hype.
+      </p>
     </div>
     <div class="about-card">
       <h3>LONG-TERM GOAL</h3>
-      <p>Sustainable decentralized governance.</p>
+      <p>
+        Build a scalable AI-powered ecosystem where users, developers
+        and communities benefit from intelligent automation and
+        decentralized governance.
+      </p>
     </div>
   </div>
 
@@ -239,9 +250,9 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
 <section id="tokenomics">
   <h2>Tokenomics</h2>
   <div class="box"><span class="box-title">GENERAL</span><p>Token: BEPAI<br>Max Supply: 1,000,000,000<br>Mint: Disabled</p></div>
-  <div class="box"><span class="box-title">DISTRIBUTION</span><p>Presale 10% • Liquidity 70% • Ecosystem 14% • Team 1% • Reserve 5%</p></div>
+  <div class="box"><span class="box-title">DISTRIBUTION</span><p>Presale: 100,000,000 (10%)<br>Liquidity: 700,000,000 (70%)<br>Ecosystem: 140,000,000 (14%)<br>Team: 10,000,000 (1%)<br>Reserve: 50,000,000 (5%)</p></div>
   <div class="box"><span class="box-title">PRICING</span><p>1 BEPAI = 0.012 USDT<br>1 USDT ≈ 83 BEPAI</p></div>
-  <div class="box"><span class="box-title">SECURITY</span><p>Liquidity locking and audit planned.</p></div>
+  <div class="box"><span class="box-title">SECURITY</span><p>Liquidity locking and audit are planned for launch.</p></div>
 </section>
 
 <section id="transfer">
@@ -258,26 +269,17 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 
 <script>
-let provider = null;
-let signer = null;
-
-const RECEIVER = "0xa7669BfB384B33169705eFd51945d52840bbe9d8";
-const BSC_CHAIN = "0x38";
+let provider=null, signer=null;
+const RECEIVER="0xa7669BfB384B33169705eFd51945d52840bbe9d8";
+const BSC_CHAIN="0x38";
 
 async function connectWallet(){
-  if(!window.ethereum){
-    alert("MetaMask not found");
-    return;
-  }
-
+  if(!window.ethereum){alert("MetaMask not found");return;}
   try{
-    await window.ethereum.request({
-      method:"wallet_switchEthereumChain",
-      params:[{chainId:BSC_CHAIN}]
-    });
+    await ethereum.request({method:"wallet_switchEthereumChain",params:[{chainId:BSC_CHAIN}]});
   }catch(e){
-    if(e.code === 4902){
-      await window.ethereum.request({
+    if(e.code===4902){
+      await ethereum.request({
         method:"wallet_addEthereumChain",
         params:[{
           chainId:BSC_CHAIN,
@@ -287,50 +289,28 @@ async function connectWallet(){
           blockExplorerUrls:["https://bscscan.com/"]
         }]
       });
-    }else{
-      return;
-    }
+    }else{return;}
   }
-
-  provider = new ethers.providers.Web3Provider(window.ethereum);
-  await provider.send("eth_requestAccounts", []);
-  signer = provider.getSigner();
-
-  document.getElementById("transfer")
-    .scrollIntoView({behavior:"smooth"});
+  provider=new ethers.providers.Web3Provider(window.ethereum);
+  await provider.send("eth_requestAccounts",[]);
+  signer=provider.getSigner();
+  document.getElementById("transfer").scrollIntoView({behavior:"smooth"});
 }
 
 async function sendBNB(){
-  if(!signer){
-    alert("Please connect wallet first.");
-    return;
-  }
-
-  const amount = document.getElementById("bnbAmount").value;
-  if(!amount || amount <= 0){
-    alert("Enter a valid BNB amount.");
-    return;
-  }
-
-  try{
-    const tx = await signer.sendTransaction({
-      to: RECEIVER,
-      value: ethers.utils.parseEther(amount)
-    });
-    alert(
-      "Transaction sent successfully.\n\nTX Hash:\n" +
-      tx.hash +
-      "\n\nView on BscScan:\nhttps://bscscan.com/tx/" + tx.hash
-    );
-  }catch(err){
-    console.error(err);
-    alert("Transaction cancelled or failed.");
-  }
+  if(!signer){alert("Connect wallet first");return;}
+  const amount=document.getElementById("bnbAmount").value;
+  if(!amount||amount<=0){alert("Enter amount");return;}
+  const tx=await signer.sendTransaction({
+    to:RECEIVER,
+    value:ethers.utils.parseEther(amount)
+  });
+  alert("TX sent:\nhttps://bscscan.com/tx/"+tx.hash);
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
   document.querySelectorAll("section").forEach((s,i)=>{
-    setTimeout(()=>s.classList.add("show"), i * 300);
+    setTimeout(()=>s.classList.add("show"),i*300);
   });
 });
 </script>
