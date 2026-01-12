@@ -5,9 +5,8 @@
 <title>BEPAI</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- FAVICON -->
-<link rel="icon" type="image/png" href="favicon.png">
-<link rel="apple-touch-icon" href="favicon.png">
+<!-- FAVICON (TAB ICON) -->
+<link rel="icon" href="favicon.ico">
 
 <style>
 :root { --glow: rgba(140,0,255,.45); }
@@ -18,108 +17,146 @@ body{
   color:#fff;
   display:flex;
   min-height:100vh;
-  background:linear-gradient(120deg,#050505,#0b0b0b,#050505);
-  background-size:300% 300%;
-  animation:bgMove 20s ease infinite;
-}
-@keyframes bgMove{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+  background:#050505;
 }
 
 /* SIDEBAR */
 .sidebar{
   width:220px;
-  background:rgba(0,0,0,.75);
-  backdrop-filter:blur(12px);
+  background:rgba(0,0,0,.85);
+  backdrop-filter:blur(14px);
   padding:24px;
   position:fixed;
   height:100vh;
   border-right:1px solid rgba(255,255,255,.05);
+  z-index:10;
 }
-.logo{width:140px;margin-bottom:40px;transition:.4s}
+.logo{
+  width:140px;
+  margin-bottom:40px;
+  transition:.4s
+}
 .logo:hover{transform:scale(1.08)}
 .nav a{
-  display:block;color:#9ca3af;text-decoration:none;
-  margin-bottom:16px;letter-spacing:2px;font-size:14px;transition:.3s
+  display:block;
+  color:#9ca3af;
+  text-decoration:none;
+  margin-bottom:16px;
+  letter-spacing:2px;
+  font-size:14px;
+  transition:.3s
 }
 .nav a:hover{color:#fff}
 
 /* CONTENT */
-.content{margin-left:220px;padding:70px;max-width:900px}
-section{
-  margin-bottom:140px;opacity:0;transform:translateY(60px);
-  transition:all .9s ease
+.content{
+  margin-left:220px;
+  width:100%;
 }
-section.show{opacity:1;transform:translateY(0)}
+section{
+  padding:120px 70px;
+  opacity:0;
+  transform:translateY(60px);
+  transition:all .9s ease;
+}
+section.show{
+  opacity:1;
+  transform:translateY(0)
+}
 h2{font-size:32px}
-p{color:#c5c5c5;line-height:1.7;max-width:760px}
+p{
+  color:#cfcfcf;
+  line-height:1.8;
+  max-width:760px
+}
 
 /* HERO */
+#about{
+  min-height:100vh;
+  background:
+    linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
+    url("assets/hero-bg.jpg") center/cover no-repeat;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
 .hero-title{
-  font-size:56px;letter-spacing:6px;margin:0 0 16px 0;
-  white-space:nowrap;overflow:hidden;border-right:3px solid #fff;
+  font-size:64px;
+  letter-spacing:8px;
+  margin:0 0 20px 0;
+  white-space:nowrap;
+  overflow:hidden;
+  border-right:3px solid #fff;
   width:0;
-  animation:typing 2.2s steps(6,end) forwards, caret .8s step-end infinite;
-  text-shadow:0 0 30px var(--glow)
+  animation:typing 2.4s steps(6,end) forwards, caret .8s step-end infinite;
+  text-shadow:0 0 40px var(--glow)
 }
 @keyframes typing{to{width:6ch}}
 @keyframes caret{50%{border-color:transparent}}
+
 .hero-sub{
-  opacity:0;transform:translateY(10px);
-  animation:fadeUp .9s ease forwards;animation-delay:2.3s
+  max-width:720px;
+  font-size:18px;
+  opacity:0;
+  animation:fadeUp .9s ease forwards;
+  animation-delay:2.5s
 }
-@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{
+  to{opacity:1;transform:translateY(0)}
+}
 
 /* BUTTON */
 .button{
-  position:relative;display:inline-block;margin-top:30px;
-  padding:16px 42px;color:#fff;text-decoration:none;
-  border:1px solid #fff;overflow:hidden;letter-spacing:2px
+  position:relative;
+  display:inline-block;
+  margin-top:40px;
+  padding:16px 46px;
+  color:#fff;
+  text-decoration:none;
+  border:1px solid #fff;
+  overflow:hidden;
+  letter-spacing:2px
 }
 .button::after{
-  content:"";position:absolute;top:0;left:-100%;
-  width:100%;height:100%;
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
   background:linear-gradient(120deg,transparent,rgba(255,255,255,.8),transparent);
-  transition:.5s
+  transition:.6s
 }
 .button:hover::after{left:100%}
-.button:hover{box-shadow:0 0 25px var(--glow)}
+.button:hover{box-shadow:0 0 30px var(--glow)}
 
 /* BOXES */
 .box{
   border-left:2px solid rgba(255,255,255,.4);
-  padding-left:24px;margin-bottom:45px;transition:.4s
-}
-.box:hover{transform:translateX(8px);box-shadow:-5px 0 25px var(--glow)}
-.box-title{letter-spacing:3px;font-size:13px;margin-bottom:6px}
-
-/* ABOUT GRID */
-.about-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:40px;
-  margin-top:40px
-}
-.about-card{
-  background:rgba(255,255,255,.03);
-  padding:30px;
-  border:1px solid rgba(255,255,255,.05);
+  padding-left:24px;
+  margin-bottom:45px;
   transition:.4s
 }
-.about-card:hover{
-  box-shadow:0 0 30px var(--glow);
-  transform:translateY(-6px)
+.box:hover{
+  transform:translateX(8px);
+  box-shadow:-5px 0 25px var(--glow)
 }
-.about-card h3{margin-top:0;letter-spacing:3px;font-size:16px}
+.box-title{
+  letter-spacing:3px;
+  font-size:13px;
+  margin-bottom:6px
+}
 
 /* MOBILE */
 @media(max-width:768px){
-  .sidebar{position:relative;width:100%;height:auto}
-  .content{margin-left:0;padding:40px}
-  .hero-title{font-size:42px}
-  .about-grid{grid-template-columns:1fr}
+  .sidebar{
+    position:relative;
+    width:100%;
+    height:auto
+  }
+  .content{margin-left:0}
+  section{padding:100px 40px}
+  .hero-title{font-size:44px}
 }
 </style>
 </head>
@@ -127,7 +164,7 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
 <body>
 
 <aside class="sidebar">
-  <img src="assets/logo.png" class="logo">
+  <img src="assets/logo.png" class="logo" alt="BEPAI logo">
   <nav class="nav">
     <a href="#about">ABOUT</a>
     <a href="#roadmap">ROADMAP</a>
@@ -142,83 +179,39 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
 <section id="about">
   <h1 class="hero-title">BEPAI</h1>
   <p class="hero-sub">
-    BEPAI is an AI-driven blockchain project designed to power
-    intelligent, scalable and decentralized ecosystems.
+    BEPAI is an AI-powered blockchain project focused on building
+    intelligent, scalable and future-ready decentralized ecosystems.
   </p>
-
-  <div class="about-grid">
-    <div class="about-card">
-      <h3>VISION</h3>
-      <p>
-        To become a next-generation AI blockchain layer that enables
-        autonomous decision-making and sustainable decentralized growth.
-      </p>
-    </div>
-
-    <div class="about-card">
-      <h3>MISSION</h3>
-      <p>
-        Merging artificial intelligence with blockchain technology to
-        build efficient, transparent and adaptive decentralized systems.
-      </p>
-    </div>
-
-    <div class="about-card">
-      <h3>WHY BEPAI?</h3>
-      <p>
-        Real AI utility, strong tokenomics and long-term ecosystem focus
-        over short-term hype.
-      </p>
-    </div>
-
-    <div class="about-card">
-      <h3>LONG-TERM GOAL</h3>
-      <p>
-        A scalable AI-powered ecosystem benefiting users, developers
-        and communities through intelligent automation.
-      </p>
-    </div>
-  </div>
-
   <a href="whitepaper.pdf" class="button" target="_blank">Read Whitepaper</a>
 </section>
 
 <section id="roadmap">
   <h2>Roadmap</h2>
-  <div class="box"><span class="box-title">Q1 2026</span>
-    <p>Foundation, brand identity, website launch, whitepaper and community.</p>
+  <div class="box">
+    <span class="box-title">Q1 2026</span>
+    <p>Foundation, brand identity, website launch and community building.</p>
   </div>
-  <div class="box"><span class="box-title">Q2 2026</span>
+  <div class="box">
+    <span class="box-title">Q2 2026</span>
     <p>Token deployment, ecosystem architecture and early adoption.</p>
   </div>
-  <div class="box"><span class="box-title">Q3 2026</span>
+  <div class="box">
+    <span class="box-title">Q3 2026</span>
     <p>AI integrations, governance tools and scalability optimization.</p>
   </div>
 </section>
 
 <section id="tokenomics">
   <h2>Tokenomics</h2>
-
-  <div class="box"><span class="box-title">GENERAL</span>
-    <p>Token: BEPAI<br>Max Supply: 1,000,000,000<br>Mint: Disabled</p>
-  </div>
-
-  <div class="box"><span class="box-title">DISTRIBUTION</span>
+  <div class="box">
     <p>
       Presale: 100,000,000 (10%)<br>
       Liquidity: 700,000,000 (70%)<br>
       Ecosystem: 140,000,000 (14%)<br>
       Team: 10,000,000 (1%)<br>
-      Reserve: 50,000,000 (5%)
+      Reserve: 50,000,000 (5%)<br><br>
+      Price: 1 BEPAI = 0.012 USDT
     </p>
-  </div>
-
-  <div class="box"><span class="box-title">PRICING</span>
-    <p>1 BEPAI = 0.012 USDT<br>1 USDT ≈ 83 BEPAI</p>
-  </div>
-
-  <div class="box"><span class="box-title">SECURITY</span>
-    <p>Liquidity locking and audit are planned for launch.</p>
   </div>
 </section>
 
