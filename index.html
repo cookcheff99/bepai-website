@@ -1,229 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Bepai</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Bepai</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      color: #ffffff;
-      display: flex;
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(120, 0, 255, 0.15), transparent 40%),
-        radial-gradient(circle at 80% 60%, rgba(0, 150, 255, 0.12), transparent 40%),
-        linear-gradient(180deg, #050505 0%, #0b0b0b 100%);
-    }
+<style>
+:root {
+  --glow: rgba(140, 0, 255, 0.35);
+}
 
-    /* SIDEBAR */
-    .sidebar {
-      width: 220px;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(10px);
-      padding: 24px;
-      box-sizing: border-box;
-      position: fixed;
-      height: 100vh;
-      border-right: 1px solid rgba(255, 255, 255, 0.05);
-    }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(120deg, #050505, #0b0b0b, #050505);
+  background-size: 300% 300%;
+  animation: bgMove 20s ease infinite;
+}
 
-    .logo {
-      width: 140px;
-      margin-bottom: 40px;
-      transition: transform 0.3s ease;
-    }
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-    .logo:hover {
-      transform: scale(1.05);
-    }
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(12px);
+  padding: 24px;
+  position: fixed;
+  height: 100vh;
+  border-right: 1px solid rgba(255,255,255,0.05);
+}
 
-    .nav a {
-      display: block;
-      color: #9ca3af;
-      text-decoration: none;
-      margin-bottom: 16px;
-      letter-spacing: 2px;
-      font-size: 14px;
-      transition: color 0.3s ease;
-    }
+.logo {
+  width: 140px;
+  margin-bottom: 40px;
+  transition: transform .4s ease;
+}
+.logo:hover { transform: scale(1.08) rotate(-1deg); }
 
-    .nav a:hover {
-      color: #ffffff;
-    }
+.nav a {
+  display: block;
+  color: #9ca3af;
+  text-decoration: none;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+  font-size: 14px;
+  transition: color .3s;
+}
+.nav a:hover { color: #fff; }
 
-    /* CONTENT */
-    .content {
-      margin-left: 220px;
-      padding: 60px;
-      max-width: 900px;
-    }
+/* CONTENT */
+.content {
+  margin-left: 220px;
+  padding: 70px;
+  max-width: 900px;
+}
 
-    section {
-      margin-bottom: 120px;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 0.9s ease, transform 0.9s ease;
-    }
+section {
+  margin-bottom: 140px;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all .9s ease;
+}
+section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    section.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+h1 { font-size: 48px; }
+h2 { font-size: 32px; }
 
-    h1 {
-      font-size: 44px;
-      margin-bottom: 16px;
-    }
+p {
+  color: #c5c5c5;
+  line-height: 1.7;
+  max-width: 700px;
+}
 
-    h2 {
-      font-size: 30px;
-      margin-bottom: 32px;
-    }
+/* BUTTON */
+.whitepaper-btn {
+  position: relative;
+  display: inline-block;
+  margin-top: 30px;
+  padding: 16px 42px;
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid #fff;
+  overflow: hidden;
+  letter-spacing: 2px;
+}
+.whitepaper-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.8), transparent);
+  transition: .5s;
+}
+.whitepaper-btn:hover::after {
+  left: 100%;
+}
+.whitepaper-btn:hover {
+  box-shadow: 0 0 25px var(--glow);
+}
 
-    p {
-      color: #b3b3b3;
-      line-height: 1.7;
-      max-width: 700px;
-    }
+/* ROADMAP */
+.roadmap-item {
+  border-left: 2px solid rgba(255,255,255,.4);
+  padding-left: 24px;
+  margin-bottom: 50px;
+  transition: all .4s ease;
+}
+.roadmap-item:hover {
+  transform: translateX(8px);
+  box-shadow: -5px 0 25px var(--glow);
+}
 
-    .whitepaper-btn {
-      display: inline-block;
-      margin-top: 28px;
-      padding: 14px 36px;
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      color: #ffffff;
-      text-decoration: none;
-      letter-spacing: 2px;
-      transition: all 0.3s ease;
-    }
+.phase {
+  letter-spacing: 2px;
+  font-size: 14px;
+  margin-bottom: 6px;
+  display: block;
+}
 
-    .whitepaper-btn:hover {
-      background-color: #ffffff;
-      color: #0b0b0b;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-    }
-
-    /* ROADMAP */
-    .roadmap-item {
-      border-left: 2px solid rgba(255, 255, 255, 0.6);
-      padding-left: 24px;
-      margin-bottom: 48px;
-      max-width: 700px;
-    }
-
-    .phase {
-      display: block;
-      font-size: 14px;
-      letter-spacing: 2px;
-      color: #ffffff;
-      margin-bottom: 8px;
-    }
-
-    @media (max-width: 768px) {
-      .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-      }
-
-      .content {
-        margin-left: 0;
-        padding: 32px;
-      }
-    }
-  </style>
+/* MOBILE */
+@media(max-width:768px){
+  .sidebar{ position:relative; width:100%; height:auto; }
+  .content{ margin-left:0; padding:40px; }
+}
+</style>
 </head>
 
 <body>
 
-  <aside class="sidebar">
-    <img src="assets/logo.png" alt="Bepai Logo" class="logo">
+<aside class="sidebar">
+  <img src="assets/logo.png" class="logo">
+  <nav class="nav">
+    <a href="#about">ABOUT</a>
+    <a href="#roadmap">ROADMAP</a>
+    <a href="whitepaper.pdf" target="_blank">WHITEPAPER</a>
+    <a href="https://x.com/tokenBepai" target="_blank">X</a>
+  </nav>
+</aside>
 
-    <nav class="nav">
-      <a href="#about">ABOUT</a>
-      <a href="#roadmap">ROADMAP</a>
-      <a href="whitepaper.pdf" target="_blank">WHITEPAPER</a>
-      <a href="https://x.com/tokenBepai" target="_blank">X</a>
-    </nav>
-  </aside>
+<main class="content">
 
-  <main class="content">
+<section id="about">
+  <h1>BEPAI</h1>
+  <p>
+    BEPAI is an AI-powered blockchain project building intelligent,
+    scalable and future-ready decentralized solutions.
+  </p>
 
-    <section id="about">
-      <h1>BEPAI</h1>
-      <p>
-        BEPAI is an AI-powered blockchain project focused on building intelligent,
-        scalable and future-ready decentralized solutions.
-      </p>
+  <a href="whitepaper.pdf" class="whitepaper-btn" target="_blank">Whitepaper</a>
+</section>
 
-      <a href="whitepaper.pdf" class="whitepaper-btn" target="_blank">
-        Whitepaper
-      </a>
+<section id="roadmap">
+  <h2>Roadmap</h2>
 
-      <br><br>
+  <div class="roadmap-item">
+    <span class="phase">PHASE 1</span>
+    <p>Research, branding, website launch and community building.</p>
+  </div>
 
-      <a href="https://x.com/tokenBepai" target="_blank"
-         style="color:#ffffff; text-decoration:none; letter-spacing:2px;">
-        Follow @tokenBepai on X
-      </a>
-    </section>
+  <div class="roadmap-item">
+    <span class="phase">PHASE 2</span>
+    <p>Token deployment, ecosystem growth and partnerships.</p>
+  </div>
 
-    <section id="roadmap">
-      <h2>Roadmap</h2>
+  <div class="roadmap-item">
+    <span class="phase">PHASE 3</span>
+    <p>Advanced AI systems, governance and long-term scaling.</p>
+  </div>
+</section>
 
-      <div class="roadmap-item">
-        <span class="phase">Phase 1</span>
-        <p>Research, brand identity, website launch and community building.</p>
-      </div>
+</main>
 
-      <div class="roadmap-item">
-        <span class="phase">Phase 2</span>
-        <p>Token deployment, ecosystem development and partnerships.</p>
-      </div>
-
-      <div class="roadmap-item">
-        <span class="phase">Phase 3</span>
-        <p>Advanced AI integration, governance and long-term scalability.</p>
-      </div>
-    </section>
-
-  </main>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const sections = document.querySelectorAll("section");
-
-      // İlk section sayfa açılır açılmaz gelsin
-      if (sections[0]) {
-        setTimeout(() => {
-          sections[0].classList.add("show");
-        }, 200);
-      }
-
-      const observer = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("show");
-            }
-          });
-        },
-        {
-          rootMargin: "0px 0px -100px 0px",
-          threshold: 0.1
-        }
-      );
-
-      sections.forEach((section, index) => {
-        if (index !== 0) {
-          observer.observe(section);
-        }
-      });
-    });
-  </script>
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+  const sections=document.querySelectorAll("section");
+  sections.forEach((s,i)=>{
+    setTimeout(()=>s.classList.add("show"), i*300);
+  });
+});
+</script>
 
 </body>
 </html>
