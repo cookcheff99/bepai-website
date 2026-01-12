@@ -89,12 +89,42 @@
       color: #94a3b8;
     }
   </style>
-</head>
+<<style>
+  body {
+    margin: 0;
+    background-color: #0b0b0b;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .site-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    background-color: #0b0b0b;
+  }
+
+  .logo {
+    max-width: 180px;   /* logo boyutu */
+    width: 100%;
+    height: auto;       /* orantıyı korur */
+  }
+
+  @media (max-width: 600px) {
+    .logo {
+      max-width: 140px; /* mobilde biraz küçülür */
+    }
+  }
+</style>
+/head>
 
 <body>
 
 <header>
-  <img src="assets/logo.png" alt="Bepai Logo" style="height:50px;">
+  <<header class="site-header">
+  <img src="assets/logo.png" alt="Bepai Logo" class="logo">
+</header>
+>
 
   <nav>
     <a href="#about">About</a>
