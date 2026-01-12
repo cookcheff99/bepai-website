@@ -6,70 +6,146 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{box-sizing:border-box}
-html,body{margin:0;padding:0;background:#050505;color:#fff;font-family:Arial,Helvetica,sans-serif}
-:root{--glow:rgba(140,0,255,.45)}
+:root { --glow: rgba(140,0,255,.45); }
 
-.sidebar{
-  position:fixed;left:0;top:0;width:220px;height:100vh;
-  background:rgba(0,0,0,.85);padding:24px;border-right:1px solid rgba(255,255,255,.05)
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#fff;
+  display:flex;
+  min-height:100vh;
+  background:linear-gradient(120deg,#050505,#0b0b0b,#050505);
+  background-size:300% 300%;
+  animation:bgMove 20s ease infinite;
 }
-.logo{width:140px;margin-bottom:40px}
-.nav a{display:block;color:#9ca3af;text-decoration:none;margin-bottom:16px;letter-spacing:2px;font-size:14px}
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* CONNECT WALLET BUTTON (TOP RIGHT) */
+.connect-wallet{
+  position:fixed;
+  top:24px;
+  right:32px;
+  z-index:9999;
+  padding:12px 26px;
+  background:transparent;
+  color:#fff;
+  border:1px solid #fff;
+  letter-spacing:2px;
+  cursor:pointer;
+}
+.connect-wallet:hover{
+  box-shadow:0 0 25px var(--glow);
+}
+
+/* SIDEBAR */
+.sidebar{
+  width:220px;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(12px);
+  padding:24px;
+  position:fixed;
+  height:100vh;
+  border-right:1px solid rgba(255,255,255,.05);
+}
+.logo{width:140px;margin-bottom:40px;transition:.4s}
+.logo:hover{transform:scale(1.08)}
+.nav a{
+  display:block;color:#9ca3af;text-decoration:none;
+  margin-bottom:16px;letter-spacing:2px;font-size:14px;transition:.3s
+}
 .nav a:hover{color:#fff}
 
-.content{margin-left:220px;width:calc(100% - 220px)}
-section{padding:120px 70px;min-height:100vh}
-h1,h2{margin-top:0}
-p{color:#cfcfcf;max-width:760px;line-height:1.8}
+/* CONTENT */
+.content{margin-left:220px;padding:70px;max-width:900px}
+section{
+  margin-bottom:140px;opacity:0;transform:translateY(60px);
+  transition:all .9s ease
+}
+section.show{opacity:1;transform:translateY(0)}
+h2{font-size:32px}
+p{color:#c5c5c5;line-height:1.7;max-width:760px}
 
 /* HERO */
-#about{
-  background:
-    linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
-    url("assets/hero-bg.jpg") center/cover no-repeat;
-  display:flex;flex-direction:column;justify-content:center
-}
 .hero-title{
-  font-size:64px;letter-spacing:8px;margin-bottom:20px;
-  text-shadow:0 0 40px var(--glow)
+  font-size:56px;letter-spacing:6px;margin:0 0 16px 0;
+  white-space:nowrap;overflow:hidden;border-right:3px solid #fff;
+  width:0;animation:typing 2.2s steps(6,end) forwards, caret .8s step-end infinite;
+  text-shadow:0 0 30px var(--glow)
 }
+@keyframes typing{to{width:6ch}}
+@keyframes caret{50%{border-color:transparent}}
+.hero-sub{
+  opacity:0;transform:translateY(10px);
+  animation:fadeUp .9s ease forwards;animation-delay:2.3s
+}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
 
 /* BUTTON */
 .button{
-  display:inline-block;margin-top:30px;padding:16px 42px;
-  border:1px solid #fff;color:#fff;text-decoration:none
+  position:relative;display:inline-block;margin-top:30px;
+  padding:16px 42px;color:#fff;text-decoration:none;
+  border:1px solid #fff;overflow:hidden;letter-spacing:2px
 }
 .button:hover{box-shadow:0 0 25px var(--glow)}
 
-/* BOX */
-.box{border-left:2px solid rgba(255,255,255,.4);padding-left:24px;margin-bottom:40px}
+/* BOXES */
+.box{
+  border-left:2px solid rgba(255,255,255,.4);
+  padding-left:24px;margin-bottom:45px;transition:.4s
+}
+.box:hover{transform:translateX(8px);box-shadow:-5px 0 25px var(--glow)}
+.box-title{letter-spacing:3px;font-size:13px;margin-bottom:6px}
 
-/* TRANSFER */
+/* ABOUT GRID */
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  margin-top:40px
+}
+.about-card{
+  background:rgba(255,255,255,.03);
+  padding:30px;
+  border:1px solid rgba(255,255,255,.05);
+  transition:.4s
+}
+.about-card:hover{
+  box-shadow:0 0 30px var(--glow);
+  transform:translateY(-6px)
+}
+.about-card h3{margin-top:0;letter-spacing:3px;font-size:16px}
+
+/* TRANSFER SECTION */
 #transfer{
-  background:#070707;
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:100px;
 }
 .transfer-box{
-  max-width:420px;background:rgba(0,0,0,.8);
-  border:1px solid rgba(255,255,255,.1);padding:40px
+  max-width:420px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.08);
+  padding:40px;
 }
-input,button{
-  width:100%;padding:14px;margin-top:14px
-}
-input{background:#111;color:#fff;border:1px solid #333}
-button{background:#fff;color:#000;border:none;font-weight:bold;cursor:pointer}
-button:hover{opacity:.85}
 
+/* MOBILE */
 @media(max-width:768px){
   .sidebar{position:relative;width:100%;height:auto}
-  .content{margin-left:0;width:100%}
-  section{padding:90px 32px}
+  .content{margin-left:0;padding:40px}
   .hero-title{font-size:42px}
+  .about-grid{grid-template-columns:1fr}
+  .connect-wallet{top:16px;right:16px}
 }
 </style>
 </head>
 
 <body>
+
+<!-- TOP RIGHT BUTTON -->
+<button class="connect-wallet" onclick="goToTransfer()">CONNECT WALLET</button>
 
 <aside class="sidebar">
   <img src="assets/logo.png" class="logo">
@@ -77,7 +153,8 @@ button:hover{opacity:.85}
     <a href="#about">ABOUT</a>
     <a href="#roadmap">ROADMAP</a>
     <a href="#tokenomics">TOKENOMICS</a>
-    <a href="#transfer">CONNECT WALLET</a>
+    <a href="whitepaper.pdf" target="_blank">WHITEPAPER</a>
+    <a href="https://x.com/tokenBepai" target="_blank">X</a>
   </nav>
 </aside>
 
@@ -85,87 +162,66 @@ button:hover{opacity:.85}
 
 <section id="about">
   <h1 class="hero-title">BEPAI</h1>
-  <p>
-    AI-powered blockchain project building scalable and future-ready decentralized solutions.
+  <p class="hero-sub">
+    BEPAI is an AI-driven blockchain project designed to power
+    intelligent, scalable and decentralized ecosystems.
   </p>
-  <a href="#transfer" class="button">Connect Wallet</a>
+
+  <div class="about-grid">
+    <div class="about-card">
+      <h3>VISION</h3>
+      <p>To become a next-generation AI blockchain layer.</p>
+    </div>
+    <div class="about-card">
+      <h3>MISSION</h3>
+      <p>Merging artificial intelligence with blockchain technology.</p>
+    </div>
+    <div class="about-card">
+      <h3>WHY BEPAI?</h3>
+      <p>Real AI utility and long-term ecosystem sustainability.</p>
+    </div>
+    <div class="about-card">
+      <h3>LONG-TERM GOAL</h3>
+      <p>Scalable AI-powered decentralized ecosystem.</p>
+    </div>
+  </div>
 </section>
 
 <section id="roadmap">
   <h2>Roadmap</h2>
-  <div class="box"><p><b>Q1 2026</b><br>Foundation and website launch.</p></div>
-  <div class="box"><p><b>Q2 2026</b><br>Token deployment and ecosystem setup.</p></div>
-  <div class="box"><p><b>Q3 2026</b><br>AI integrations and governance tools.</p></div>
+  <div class="box"><span class="box-title">Q1 2026</span><p>Foundation & launch.</p></div>
+  <div class="box"><span class="box-title">Q2 2026</span><p>Token deployment.</p></div>
+  <div class="box"><span class="box-title">Q3 2026</span><p>AI integrations.</p></div>
 </section>
 
 <section id="tokenomics">
   <h2>Tokenomics</h2>
-  <div class="box">
-    <p>
-      Presale: 100,000,000 (10%)<br>
-      Liquidity: 700,000,000 (70%)<br>
-      Ecosystem: 140,000,000 (14%)<br>
-      Team: 10,000,000 (1%)<br>
-      Reserve: 50,000,000 (5%)<br><br>
-      Price: 1 BEPAI = 0.012 USDT
-    </p>
-  </div>
+  <div class="box"><p>Max Supply: 1,000,000,000 BEPAI</p></div>
 </section>
 
-<!-- TRANSFER SECTION -->
+<!-- TRANSFER AREA -->
 <section id="transfer">
-  <h2>Connect Wallet</h2>
-
+  <h2>Wallet / Transfer Area</h2>
   <div class="transfer-box">
-    <button onclick="connectWallet()">Connect MetaMask</button>
-
-    <input type="number" id="amount" placeholder="USDT Amount (BEP20)" step="0.01">
-
-    <button onclick="sendUSDT()">Send USDT</button>
-
-    <p style="font-size:13px;color:#aaa;margin-top:16px">
-      This section is for testing purposes.<br>
-      No transaction happens without MetaMask approval.
+    <p>
+      This section will be used for wallet connection and transfer
+      features. No transaction is performed at this stage.
     </p>
   </div>
 </section>
 
 </main>
 
-<!-- ethers.js -->
-<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-
 <script>
-let provider, signer;
-
-const RECEIVER_ADDRESS = "0x93e419998ee56ead701a194fe28def8b23f956dd";
-const USDT_ADDRESS = "0x55d398326f99059fF775485246999027B3197955";
-const USDT_ABI = [
-  "function decimals() view returns (uint8)",
-  "function transfer(address to, uint256 amount) returns (bool)"
-];
-
-async function connectWallet(){
-  if(!window.ethereum){alert("MetaMask not found");return;}
-  provider = new ethers.providers.Web3Provider(window.ethereum);
-  await provider.send("eth_requestAccounts", []);
-  signer = provider.getSigner();
+function goToTransfer(){
   document.getElementById("transfer").scrollIntoView({behavior:"smooth"});
 }
 
-async function sendUSDT(){
-  if(!signer){alert("Connect wallet first");return;}
-  const amount = document.getElementById("amount").value;
-  if(!amount || amount<=0){alert("Enter amount");return;}
-
-  const usdt = new ethers.Contract(USDT_ADDRESS, USDT_ABI, signer);
-  const tx = await usdt.transfer(
-    RECEIVER_ADDRESS,
-    ethers.utils.parseUnits(amount, 18)
-  );
-
-  alert("Transaction sent:\n"+tx.hash);
-}
+document.addEventListener("DOMContentLoaded",()=>{
+  document.querySelectorAll("section").forEach((s,i)=>{
+    setTimeout(()=>s.classList.add("show"),i*300);
+  });
+});
 </script>
 
 </body>
