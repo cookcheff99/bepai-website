@@ -8,15 +8,19 @@
   <style>
     body {
       margin: 0;
+      min-height: 100vh;
       background-color: #0b0b0b;
       font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .site-header {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      padding: 24px 0;
+      text-align: center;
     }
 
     .logo {
@@ -25,35 +29,38 @@
       height: auto;
     }
 
+    .title {
+      margin-top: 16px;
+      font-size: 36px;
+      color: #ffffff;
+      letter-spacing: 3px;
+    }
+
+    .tagline {
+      margin-top: 8px;
+      font-size: 16px;
+      color: #9ca3af;
+    }
+
     @media (max-width: 600px) {
       .logo {
         max-width: 140px;
       }
+
+      .title {
+        font-size: 28px;
+      }
     }
   </style>
-  .title {
-  margin-top: 16px;
-  color: #ffffff;
-  font-size: 32px;
-  letter-spacing: 2px;
-}
-
-.tagline {
-  margin-top: 8px;
-  color: #9ca3af;
-  font-size: 16px;
-}
-
 </head>
 
 <body>
 
   <header class="site-header">
-  <img src="assets/logo.png" alt="Bepai Logo" class="logo">
-  <h1 class="title">BEPAI</h1>
-  <p class="tagline">AI-powered blockchain innovation</p>
-</header>
-
+    <img src="assets/logo.png" alt="Bepai Logo" class="logo">
+    <h1 class="title">BEPAI</h1>
+    <p class="tagline">AI-powered blockchain innovation</p>
+  </header>
 
 </body>
 </html>
