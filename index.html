@@ -24,17 +24,18 @@ body{
   100%{background-position:0% 50%}
 }
 
-/* CONNECT WALLET BUTTON (TOP RIGHT) */
+/* === SAĞ ÜST CONNECT WALLET === */
 .connect-wallet{
   position:fixed;
-  top:24px;
-  right:32px;
+  top:20px;
+  right:24px;
   z-index:9999;
-  padding:12px 26px;
+  padding:12px 22px;
   background:transparent;
   color:#fff;
   border:1px solid #fff;
   letter-spacing:2px;
+  font-size:13px;
   cursor:pointer;
 }
 .connect-wallet:hover{
@@ -119,16 +120,10 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
 }
 .about-card h3{margin-top:0;letter-spacing:3px;font-size:16px}
 
-/* TRANSFER SECTION */
+/* TRANSFER */
 #transfer{
   border-top:1px solid rgba(255,255,255,.08);
-  padding-top:100px;
-}
-.transfer-box{
-  max-width:420px;
-  background:rgba(255,255,255,.03);
-  border:1px solid rgba(255,255,255,.08);
-  padding:40px;
+  padding-top:120px;
 }
 
 /* MOBILE */
@@ -137,14 +132,13 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
   .content{margin-left:0;padding:40px}
   .hero-title{font-size:42px}
   .about-grid{grid-template-columns:1fr}
-  .connect-wallet{top:16px;right:16px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- TOP RIGHT BUTTON -->
+<!-- SAĞ ÜST BUTON -->
 <button class="connect-wallet" onclick="goToTransfer()">CONNECT WALLET</button>
 
 <aside class="sidebar">
@@ -166,32 +160,13 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
     BEPAI is an AI-driven blockchain project designed to power
     intelligent, scalable and decentralized ecosystems.
   </p>
-
-  <div class="about-grid">
-    <div class="about-card">
-      <h3>VISION</h3>
-      <p>To become a next-generation AI blockchain layer.</p>
-    </div>
-    <div class="about-card">
-      <h3>MISSION</h3>
-      <p>Merging artificial intelligence with blockchain technology.</p>
-    </div>
-    <div class="about-card">
-      <h3>WHY BEPAI?</h3>
-      <p>Real AI utility and long-term ecosystem sustainability.</p>
-    </div>
-    <div class="about-card">
-      <h3>LONG-TERM GOAL</h3>
-      <p>Scalable AI-powered decentralized ecosystem.</p>
-    </div>
-  </div>
 </section>
 
 <section id="roadmap">
   <h2>Roadmap</h2>
-  <div class="box"><span class="box-title">Q1 2026</span><p>Foundation & launch.</p></div>
-  <div class="box"><span class="box-title">Q2 2026</span><p>Token deployment.</p></div>
-  <div class="box"><span class="box-title">Q3 2026</span><p>AI integrations.</p></div>
+  <div class="box"><p>Q1 2026 – Foundation & launch</p></div>
+  <div class="box"><p>Q2 2026 – Token deployment</p></div>
+  <div class="box"><p>Q3 2026 – AI integrations</p></div>
 </section>
 
 <section id="tokenomics">
@@ -199,22 +174,17 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
   <div class="box"><p>Max Supply: 1,000,000,000 BEPAI</p></div>
 </section>
 
-<!-- TRANSFER AREA -->
 <section id="transfer">
   <h2>Wallet / Transfer Area</h2>
-  <div class="transfer-box">
-    <p>
-      This section will be used for wallet connection and transfer
-      features. No transaction is performed at this stage.
-    </p>
-  </div>
+  <p>This section will be used for wallet connection.</p>
 </section>
 
 </main>
 
 <script>
 function goToTransfer(){
-  document.getElementById("transfer").scrollIntoView({behavior:"smooth"});
+  document.getElementById("transfer")
+    .scrollIntoView({behavior:"smooth"});
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
