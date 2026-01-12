@@ -6,52 +6,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background-color: #0b0b0b;
-      font-family: Arial, Helvetica, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: #0b0b0b;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    .site-header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
+  .site-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 
+  .logo {
+    max-width: 180px;
+    width: 100%;
+    height: auto;
+  }
+
+  .title {
+    margin-top: 16px;
+    font-size: 36px;
+    color: #ffffff;
+    letter-spacing: 3px;
+  }
+
+  .tagline {
+    margin-top: 8px;
+    font-size: 16px;
+    color: #9ca3af;
+  }
+
+  .whitepaper-btn {
+    margin-top: 24px;
+    padding: 12px 32px;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .whitepaper-btn:hover {
+    background-color: #ffffff;
+    color: #0b0b0b;
+  }
+
+  @media (max-width: 600px) {
     .logo {
-      max-width: 180px;
-      width: 100%;
-      height: auto;
+      max-width: 140px;
     }
 
     .title {
-      margin-top: 16px;
-      font-size: 36px;
-      color: #ffffff;
-      letter-spacing: 3px;
+      font-size: 28px;
     }
+  }
+</style>
 
-    .tagline {
-      margin-top: 8px;
-      font-size: 16px;
-      color: #9ca3af;
-    }
-
-    @media (max-width: 600px) {
-      .logo {
-        max-width: 140px;
-      }
-
-      .title {
-        font-size: 28px;
-      }
-    }
-  </style>
 </head>
 
 <body>
@@ -60,6 +77,10 @@
     <img src="assets/logo.png" alt="Bepai Logo" class="logo">
     <h1 class="title">BEPAI</h1>
     <p class="tagline">AI-powered blockchain innovation</p>
+    <a href="whitepaper.pdf" class="whitepaper-btn" target="_blank">
+  Whitepaper
+</a>
+
   </header>
 
 </body>
