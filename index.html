@@ -24,7 +24,7 @@ body{
   100%{background-position:0% 50%}
 }
 
-/* ===== CONNECT WALLET (TOP RIGHT) ===== */
+/* CONNECT WALLET – SAĞ ÜST */
 .connect-wallet{
   position:fixed;
   top:20px;
@@ -38,9 +38,7 @@ body{
   font-size:13px;
   cursor:pointer;
 }
-.connect-wallet:hover{
-  box-shadow:0 0 25px var(--glow);
-}
+.connect-wallet:hover{box-shadow:0 0 25px var(--glow)}
 
 /* SIDEBAR */
 .sidebar{
@@ -55,8 +53,13 @@ body{
 .logo{width:140px;margin-bottom:40px;transition:.4s}
 .logo:hover{transform:scale(1.08)}
 .nav a{
-  display:block;color:#9ca3af;text-decoration:none;
-  margin-bottom:16px;letter-spacing:2px;font-size:14px;transition:.3s
+  display:block;
+  color:#9ca3af;
+  text-decoration:none;
+  margin-bottom:16px;
+  letter-spacing:2px;
+  font-size:14px;
+  transition:.3s
 }
 .nav a:hover{color:#fff}
 
@@ -148,6 +151,26 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
   font-size:16px
 }
 
+/* TRANSFER */
+#transfer input,#transfer button{
+  width:100%;
+  padding:14px;
+  margin-top:14px
+}
+#transfer input{
+  background:#111;
+  color:#fff;
+  border:1px solid #333
+}
+#transfer button{
+  background:#fff;
+  color:#000;
+  border:none;
+  font-weight:bold;
+  cursor:pointer
+}
+#transfer button:hover{opacity:.85}
+
 /* MOBILE */
 @media(max-width:768px){
   .sidebar{position:relative;width:100%;height:auto}
@@ -160,8 +183,7 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
 
 <body>
 
-<!-- CONNECT WALLET -->
-<button class="connect-wallet" onclick="goToTransfer()">CONNECT WALLET</button>
+<button class="connect-wallet" onclick="connectWallet()">CONNECT WALLET</button>
 
 <aside class="sidebar">
   <img src="assets/logo.png" class="logo">
@@ -169,14 +191,12 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
     <a href="#about">ABOUT</a>
     <a href="#roadmap">ROADMAP</a>
     <a href="#tokenomics">TOKENOMICS</a>
-    <a href="whitepaper.pdf" target="_blank">WHITEPAPER</a>
-    <a href="https://x.com/tokenBepai" target="_blank">X</a>
+    <a href="#transfer">TRANSFER</a>
   </nav>
 </aside>
 
 <main class="content">
 
-<!-- ABOUT -->
 <section id="about">
   <h1 class="hero-title">BEPAI</h1>
   <p class="hero-sub">
@@ -224,7 +244,6 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
   <a href="whitepaper.pdf" class="button" target="_blank">Read Whitepaper</a>
 </section>
 
-<!-- ROADMAP (ESKİ HALİ) -->
 <section id="roadmap">
   <h2>Roadmap</h2>
   <div class="box"><span class="box-title">Q1 2026</span>
@@ -238,7 +257,6 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
   </div>
 </section>
 
-<!-- TOKENOMICS (ESKİ HALİ) -->
 <section id="tokenomics">
   <h2>Tokenomics</h2>
 
@@ -272,18 +290,75 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
   </div>
 </section>
 
-<!-- TRANSFER -->
 <section id="transfer">
-  <h2>Wallet / Transfer Area</h2>
-  <p>This section will be used for wallet connection.</p>
+  <h2>Send BNB (BSC)</h2>
+  <input id="bnbAmount" type="number" step="0.001" placeholder="Amount (BNB)">
+  <button onclick="sendBNB()">Send BNB</button>
+  <p style="font-size:13px;color:#aaa">
+    Receiver: 0xa7669BfB384B33169705eFd51945d52840bbe9d8
+  </p>
 </section>
 
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+
 <script>
-function goToTransfer(){
+let provider, signer;
+const RECEIVER = "0xa7669BfB384B33169705eFd51945d52840bbe9d8";
+const BSC_CHAIN = "0x38";
+
+async function connectWallet(){
+  if(!window.ethereum){
+    alert("MetaMask not found");
+    return;
+  }
+
+  try{
+    await ethereum.request({
+      method:"wallet_switchEthereumChain",
+      params:[{chainId:BSC_CHAIN}]
+    });
+  }catch(e){
+    if(e.code===4902){
+      await ethereum.request({
+        method:"wallet_addEthereumChain",
+        params:[{
+          chainId:BSC_CHAIN,
+          chainName:"BNB Smart Chain",
+          nativeCurrency:{name:"BNB",symbol:"BNB",decimals:18},
+          rpcUrls:["https://bsc-dataseed.binance.org/"],
+          blockExplorerUrls:["https://bscscan.com/"]
+        }]
+      });
+    }else{
+      return;
+    }
+  }
+
+  provider = new ethers.providers.Web3Provider(window.ethereum);
+  await provider.send("eth_requestAccounts",[]);
+  signer = provider.getSigner();
+
   document.getElementById("transfer")
     .scrollIntoView({behavior:"smooth"});
+}
+
+async function sendBNB(){
+  if(!signer){
+    alert("Connect wallet first");
+    return;
+  }
+  const amount = document.getElementById("bnbAmount").value;
+  if(!amount || amount <= 0){
+    alert("Enter amount");
+    return;
+  }
+  const tx = await signer.sendTransaction({
+    to: RECEIVER,
+    value: ethers.utils.parseEther(amount)
+  });
+  alert("Transaction sent:\n"+tx.hash);
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
