@@ -5,38 +5,43 @@
 <title>BEPAI</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- FAVICON (TAB ICON) -->
-<link rel="icon" href="favicon.ico">
+<!-- FORCE FAVICON -->
+<link rel="icon" href="/favicon.ico?v=1" type="image/x-icon">
 
 <style>
-:root { --glow: rgba(140,0,255,.45); }
-
-body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  color:#fff;
-  display:flex;
-  min-height:100vh;
-  background:#050505;
+*{
+  box-sizing:border-box;
 }
+
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  overflow-x:hidden;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#050505;
+  color:#fff;
+}
+
+:root{--glow:rgba(140,0,255,.45);}
 
 /* SIDEBAR */
 .sidebar{
+  position:fixed;
+  top:0;
+  left:0;
   width:220px;
+  height:100vh;
   background:rgba(0,0,0,.85);
   backdrop-filter:blur(14px);
   padding:24px;
-  position:fixed;
-  height:100vh;
   border-right:1px solid rgba(255,255,255,.05);
-  z-index:10;
+  z-index:1000;
 }
 .logo{
   width:140px;
   margin-bottom:40px;
-  transition:.4s
 }
-.logo:hover{transform:scale(1.08)}
 .nav a{
   display:block;
   color:#9ca3af;
@@ -44,35 +49,38 @@ body{
   margin-bottom:16px;
   letter-spacing:2px;
   font-size:14px;
-  transition:.3s
 }
 .nav a:hover{color:#fff}
 
 /* CONTENT */
 .content{
   margin-left:220px;
-  width:100%;
+  width:calc(100% - 220px);
 }
+
+/* SECTIONS */
 section{
   padding:120px 70px;
+  min-height:100vh;
   opacity:0;
-  transform:translateY(60px);
+  transform:translateY(40px);
   transition:all .9s ease;
 }
 section.show{
   opacity:1;
-  transform:translateY(0)
+  transform:translateY(0);
 }
+
+h1,h2{margin-top:0}
 h2{font-size:32px}
 p{
   color:#cfcfcf;
   line-height:1.8;
-  max-width:760px
+  max-width:760px;
 }
 
 /* HERO */
 #about{
-  min-height:100vh;
   background:
     linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
     url("assets/hero-bg.jpg") center/cover no-repeat;
@@ -83,68 +91,39 @@ p{
 .hero-title{
   font-size:64px;
   letter-spacing:8px;
-  margin:0 0 20px 0;
   white-space:nowrap;
   overflow:hidden;
   border-right:3px solid #fff;
   width:0;
-  animation:typing 2.4s steps(6,end) forwards, caret .8s step-end infinite;
-  text-shadow:0 0 40px var(--glow)
+  animation:typing 2.4s steps(6,end) forwards;
+  text-shadow:0 0 40px var(--glow);
 }
 @keyframes typing{to{width:6ch}}
-@keyframes caret{50%{border-color:transparent}}
 
 .hero-sub{
-  max-width:720px;
   font-size:18px;
-  opacity:0;
-  animation:fadeUp .9s ease forwards;
-  animation-delay:2.5s
-}
-@keyframes fadeUp{
-  to{opacity:1;transform:translateY(0)}
+  margin-top:20px;
+  max-width:720px;
 }
 
 /* BUTTON */
 .button{
-  position:relative;
   display:inline-block;
   margin-top:40px;
   padding:16px 46px;
   color:#fff;
   text-decoration:none;
   border:1px solid #fff;
-  overflow:hidden;
-  letter-spacing:2px
 }
-.button::after{
-  content:"";
-  position:absolute;
-  top:0;
-  left:-100%;
-  width:100%;
-  height:100%;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,.8),transparent);
-  transition:.6s
+.button:hover{
+  box-shadow:0 0 25px var(--glow);
 }
-.button:hover::after{left:100%}
-.button:hover{box-shadow:0 0 30px var(--glow)}
 
-/* BOXES */
+/* BOX */
 .box{
   border-left:2px solid rgba(255,255,255,.4);
   padding-left:24px;
-  margin-bottom:45px;
-  transition:.4s
-}
-.box:hover{
-  transform:translateX(8px);
-  box-shadow:-5px 0 25px var(--glow)
-}
-.box-title{
-  letter-spacing:3px;
-  font-size:13px;
-  margin-bottom:6px
+  margin-bottom:40px;
 }
 
 /* MOBILE */
@@ -152,11 +131,18 @@ p{
   .sidebar{
     position:relative;
     width:100%;
-    height:auto
+    height:auto;
   }
-  .content{margin-left:0}
-  section{padding:100px 40px}
-  .hero-title{font-size:44px}
+  .content{
+    margin-left:0;
+    width:100%;
+  }
+  section{
+    padding:100px 32px;
+  }
+  .hero-title{
+    font-size:42px;
+  }
 }
 </style>
 </head>
@@ -164,7 +150,7 @@ p{
 <body>
 
 <aside class="sidebar">
-  <img src="assets/logo.png" class="logo" alt="BEPAI logo">
+  <img src="assets/logo.png" class="logo" alt="BEPAI">
   <nav class="nav">
     <a href="#about">ABOUT</a>
     <a href="#roadmap">ROADMAP</a>
@@ -187,18 +173,9 @@ p{
 
 <section id="roadmap">
   <h2>Roadmap</h2>
-  <div class="box">
-    <span class="box-title">Q1 2026</span>
-    <p>Foundation, brand identity, website launch and community building.</p>
-  </div>
-  <div class="box">
-    <span class="box-title">Q2 2026</span>
-    <p>Token deployment, ecosystem architecture and early adoption.</p>
-  </div>
-  <div class="box">
-    <span class="box-title">Q3 2026</span>
-    <p>AI integrations, governance tools and scalability optimization.</p>
-  </div>
+  <div class="box"><p><b>Q1 2026</b><br>Foundation and website launch.</p></div>
+  <div class="box"><p><b>Q2 2026</b><br>Token deployment and ecosystem setup.</p></div>
+  <div class="box"><p><b>Q3 2026</b><br>AI integrations and governance tools.</p></div>
 </section>
 
 <section id="tokenomics">
@@ -220,7 +197,7 @@ p{
 <script>
 document.addEventListener("DOMContentLoaded",()=>{
   document.querySelectorAll("section").forEach((s,i)=>{
-    setTimeout(()=>s.classList.add("show"),i*300);
+    setTimeout(()=>s.classList.add("show"),i*250);
   });
 });
 </script>
