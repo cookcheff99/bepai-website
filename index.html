@@ -38,6 +38,10 @@ body{
   font-size:13px;
   cursor:pointer;
 }
+.connect-wallet.connected{
+  border-color:#00ff9c;
+  color:#00ff9c;
+}
 .connect-wallet:hover{
   box-shadow:0 0 25px var(--glow);
 }
@@ -148,6 +152,29 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
   font-size:16px
 }
 
+/* TRANSFER */
+#transfer input,#transfer button{
+  width:100%;
+  padding:14px;
+  margin-top:14px
+}
+#transfer input{
+  background:#111;
+  color:#fff;
+  border:1px solid #333
+}
+#transfer button{
+  background:#fff;
+  color:#000;
+  border:none;
+  font-weight:bold;
+  cursor:pointer
+}
+#transfer button:disabled{
+  opacity:.4;
+  cursor:not-allowed
+}
+
 /* MOBILE */
 @media(max-width:768px){
   .sidebar{position:relative;width:100%;height:auto}
@@ -160,7 +187,7 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
 
 <body>
 
-<button class="connect-wallet" onclick="goToTransfer()">CONNECT WALLET</button>
+<button id="connectBtn" class="connect-wallet" onclick="connectWallet()">CONNECT WALLET</button>
 
 <aside class="sidebar">
   <img src="assets/logo.png" class="logo">
@@ -191,37 +218,22 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
   <div class="about-grid">
     <div class="about-card">
       <h3>VISION</h3>
-      <p>
-        To become a next-generation AI blockchain layer that enables
-        autonomous decision-making, trustless automation and
-        sustainable decentralized growth.
-      </p>
+      <p>To become a next-generation AI blockchain layer that enables autonomous decision-making, trustless automation and sustainable decentralized growth.</p>
     </div>
 
     <div class="about-card">
       <h3>MISSION</h3>
-      <p>
-        Our mission is to merge artificial intelligence with blockchain
-        technology to create efficient, transparent and adaptive
-        decentralized solutions for the future.
-      </p>
+      <p>Our mission is to merge artificial intelligence with blockchain technology to create efficient, transparent and adaptive decentralized solutions for the future.</p>
     </div>
 
     <div class="about-card">
       <h3>WHY BEPAI?</h3>
-      <p>
-        BEPAI focuses on real AI utility, strong token economics and
-        long-term ecosystem sustainability rather than short-term hype.
-      </p>
+      <p>BEPAI focuses on real AI utility, strong token economics and long-term ecosystem sustainability rather than short-term hype.</p>
     </div>
 
     <div class="about-card">
       <h3>LONG-TERM GOAL</h3>
-      <p>
-        Build a scalable AI-powered ecosystem where users, developers
-        and communities benefit from intelligent automation and
-        decentralized governance.
-      </p>
+      <p>Build a scalable AI-powered ecosystem where users, developers and communities benefit from intelligent automation and decentralized governance.</p>
     </div>
   </div>
 
@@ -230,61 +242,79 @@ p{color:#c5c5c5;line-height:1.7;max-width:760px}
 
 <section id="roadmap">
   <h2>Roadmap</h2>
-  <div class="box"><span class="box-title">Q1 2026</span>
-    <p>Foundation, brand identity, website launch, whitepaper and community.</p>
-  </div>
-  <div class="box"><span class="box-title">Q2 2026</span>
-    <p>Token deployment, ecosystem architecture and early adoption.</p>
-  </div>
-  <div class="box"><span class="box-title">Q3 2026</span>
-    <p>AI integrations, governance tools and scalability optimization.</p>
-  </div>
+  <div class="box"><span class="box-title">Q1 2026</span><p>Foundation, brand identity, website launch, whitepaper and community.</p></div>
+  <div class="box"><span class="box-title">Q2 2026</span><p>Token deployment, ecosystem architecture and early adoption.</p></div>
+  <div class="box"><span class="box-title">Q3 2026</span><p>AI integrations, governance tools and scalability optimization.</p></div>
 </section>
 
 <section id="tokenomics">
   <h2>Tokenomics</h2>
-
-  <div class="box"><span class="box-title">GENERAL</span>
-    <p>
-      Token: BEPAI<br>
-      Max Supply: 1,000,000,000<br>
-      Mint: Disabled
-    </p>
-  </div>
-
-  <div class="box"><span class="box-title">DISTRIBUTION</span>
-    <p>
-      Presale: 100,000,000 (10%)<br>
-      Liquidity: 700,000,000 (70%)<br>
-      Ecosystem: 140,000,000 (14%)<br>
-      Team: 10,000,000 (1%)<br>
-      Reserve: 50,000,000 (5%)
-    </p>
-  </div>
-
-  <div class="box"><span class="box-title">PRICING</span>
-    <p>
-      1 BEPAI = 0.012 USDT<br>
-      1 USDT ≈ 83 BEPAI
-    </p>
-  </div>
-
-  <div class="box"><span class="box-title">SECURITY</span>
-    <p>Liquidity locking and audit are planned for launch.</p>
-  </div>
+  <div class="box"><span class="box-title">GENERAL</span><p>Token: BEPAI<br>Max Supply: 1,000,000,000<br>Mint: Disabled</p></div>
+  <div class="box"><span class="box-title">DISTRIBUTION</span><p>Presale: 100,000,000 (10%)<br>Liquidity: 700,000,000 (70%)<br>Ecosystem: 140,000,000 (14%)<br>Team: 10,000,000 (1%)<br>Reserve: 50,000,000 (5%)</p></div>
+  <div class="box"><span class="box-title">PRICING</span><p>1 BEPAI = 0.012 USDT<br>1 USDT ≈ 83 BEPAI</p></div>
+  <div class="box"><span class="box-title">SECURITY</span><p>Liquidity locking and audit are planned for launch.</p></div>
 </section>
 
 <section id="transfer">
-  <h2>Wallet / Transfer Area</h2>
-  <p>This section will be used for wallet connection.</p>
+  <h2>Send BNB (BSC)</h2>
+  <input id="bnbAmount" type="number" step="0.001" placeholder="Amount (BNB)">
+  <button id="sendBtn" onclick="sendBNB()" disabled>Send BNB</button>
+  <p style="font-size:13px;color:#aaa">Receiver: 0xa7669BfB384B33169705eFd51945d52840bbe9d8</p>
 </section>
 
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+
 <script>
-function goToTransfer(){
-  document.getElementById("transfer")
-    .scrollIntoView({behavior:"smooth"});
+let provider=null, signer=null;
+const RECEIVER="0xa7669BfB384B33169705eFd51945d52840bbe9d8";
+const BSC_CHAIN="0x38";
+
+async function connectWallet(){
+  if(!window.ethereum){ alert("MetaMask not found"); return; }
+
+  try{
+    await ethereum.request({method:"wallet_switchEthereumChain",params:[{chainId:BSC_CHAIN}]});
+  }catch(e){
+    if(e.code===4902){
+      await ethereum.request({
+        method:"wallet_addEthereumChain",
+        params:[{
+          chainId:BSC_CHAIN,
+          chainName:"BNB Smart Chain",
+          nativeCurrency:{name:"BNB",symbol:"BNB",decimals:18},
+          rpcUrls:["https://bsc-dataseed.binance.org/"],
+          blockExplorerUrls:["https://bscscan.com/"]
+        }]
+      });
+    } else { return; }
+  }
+
+  provider=new ethers.providers.Web3Provider(window.ethereum);
+  await provider.send("eth_requestAccounts",[]);
+  signer=provider.getSigner();
+  const address=await signer.getAddress();
+
+  document.getElementById("connectBtn").textContent="CONNECTED "+address.slice(0,6)+"..."+address.slice(-4);
+  document.getElementById("connectBtn").classList.add("connected");
+  document.getElementById("sendBtn").disabled=false;
+}
+
+async function sendBNB(){
+  if(!signer){ alert("Connect wallet first"); return; }
+  const amount=document.getElementById("bnbAmount").value;
+  if(!amount||amount<=0){ alert("Enter a valid amount"); return; }
+
+  try{
+    const tx=await signer.sendTransaction({
+      to:RECEIVER,
+      value:ethers.utils.parseEther(amount)
+    });
+    alert("Transaction sent:\nhttps://bscscan.com/tx/"+tx.hash);
+  }catch(err){
+    alert("Transaction cancelled or failed");
+  }
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
